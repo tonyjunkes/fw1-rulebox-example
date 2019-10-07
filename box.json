@@ -1,0 +1,25 @@
+{
+    "name":"fw1-rulebox-example",
+    "version":"0.1.0",
+    "author":"@tonyjunkes",
+    "shortDescription":"FW/1 & RuleBox",
+    "description":"An example of using RuleBox in an FW/1 application.",
+    "instructions":"Drop it in, fire up Commandbox, type install && start and go!",
+    "dependencies":{
+        "fw1":"be",
+        "logbox":"^5.6.2",
+        "rulebox":"^1.0.0"
+    },
+    "devDependencies":{
+        "testbox":"^3.0.0"
+    },
+    "installPaths":{
+        "fw1":"framework/",
+        "logbox":"subsystems/logbox/",
+        "rulebox":"subsystems/rulebox/",
+        "testbox":"testbox/"
+    },
+    "testbox":{
+        "runner":"http://localhost:8520/tests/runner.cfm"
+    }
+}
