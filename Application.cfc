@@ -12,7 +12,6 @@ component extends="framework.one"
 
 	// FW/1 settings
 	variables.framework = {
-		base: "/",
 		defaultSection: "main",
 		defaultItem: "default",
 		error: "main.error",
