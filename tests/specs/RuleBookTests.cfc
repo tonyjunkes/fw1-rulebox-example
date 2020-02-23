@@ -41,12 +41,15 @@ component extends="testbox.system.BaseSpec" {
 				rulebox: {
 					diLocations: [ "/models" ],
 					diConfig: {
+						// Because FW/1 assumes objects as singletons by default,
+						// we must define transients outside of convention
 						transientPattern: "^(Rule|Result)",
-						omitDirectoryAliases: true,
+						// Alias the RuleBox CFCs to match how WireBox expects them
+						singulars: { models: "@rulebox" },
 						loadListener: ( di1 ) => {
 							// Because RuleBox's Builder CFC lacks the accessors annotation,
 							// DI/1 will not inject its expected dependencies so we'll declare a custom instance
-							di1.declare( "Builder" ).asValue({
+							di1.declare( "Builder@rulebox" ).asValue({
 								ruleBook: ( name ) => {
 									return di1.getBean( "RuleBook", { name: name } );
 								},
@@ -54,14 +57,6 @@ component extends="testbox.system.BaseSpec" {
 									return di1.getBean( "Rule", { name: name } );
 								}
 							});
-							// Alias the RuleBox CFCs to match how WireBox expects them
-							di1.declare( "Builder@rulebox" ).aliasFor( "Builder" )
-								.done()
-								.declare( "Result@rulebox" ).aliasFor( "Result" )
-								.done()
-								.declare( "Rule@rulebox" ).aliasFor( "Rule" )
-								.done()
-								.declare( "RuleBook@rulebox" ).aliasFor( "RuleBook" );
 						}
 					}
 				}
